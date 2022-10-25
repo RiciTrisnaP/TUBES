@@ -1,1 +1,1 @@
- # global mo
+     # while lembar not in ""
