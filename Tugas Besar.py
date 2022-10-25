@@ -26,6 +26,16 @@ size_list = [
     (" Large ")]
 harga_size = [(0), (2000), (4000)]
 
+sugar_list = [
+    (" No sugar    "),
+    (" Less sugar  "),
+    (" Normal sugar"),
+    (" Extra sugar ")]
+
+hotcold = [
+    (" Hot  "),
+    (" Cold ")]
+
 list_nominal = [(1000), (2000), (5000), (10000), (20000)]
 money_stored = 0
 
