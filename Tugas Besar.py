@@ -1,3 +1,7 @@
+# Menambahkan metode pembayaran QRIS
+# Menambahkan pemilihan gula
+# Menambahkan pemilihan Kondisi kopi panas atau dingin
+
 
 import time
 
