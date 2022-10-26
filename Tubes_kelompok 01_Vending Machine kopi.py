@@ -6,6 +6,11 @@ uang_masuk = 0
 proses_minum = False
 list_nominal = [(1000), (2000), (5000), (10000), (20000)]
 
+pembayaran = [
+    (" Tunai "),
+    (" QRIS ")
+]
+
 isi = [
     (" Cappuchino "),
     (" Macchiato  "),
@@ -38,6 +43,16 @@ hotcold = [
 
 # def cek_input_valid():
 #     pass
+
+def pilih_metode_pembayaran():
+    global pembayaran
+    print("\nPilih metode pembayaran")
+    pembayaran = input(" (1) Tunai / (2) QRIS: ")
+    while pembayaran != "1" and pembayaran != "2":
+        print(" Maaf hanya menerima input 1 atau 2")
+        pembayaran = input(" (1) Tunai / (2) QRIS: ")
+    if pembayaran == "1":
+        input_uang()
 
 
 def input_uang():
@@ -80,14 +95,16 @@ def cek_uang():
     global total_uang
     harga_total = harga_isi[int(minum)-1] + harga_size[int(size)-1]
 
-    if total_uang < harga_total:
+    if total_uang < harga_total and pembayaran == "1":
         print("uang anda tidak mencukupi")
         time.sleep(1)
         print("silahkan masukkan uang lagi atau pilih minum sesuai jumlah uang")
         proses_minum = False
-    else:
+    elif pembayaran == "1":
         proses_minum = True
         total_uang -= harga_total
+    else:
+        proses_minum = True
 
 
 def pilih_minum():
@@ -96,7 +113,8 @@ def pilih_minum():
     global size
     global minum
     global total_uang
-    print(f"Jumlah uang Anda: Rp{total_uang}")
+    if pembayaran == "1":
+        print(f"Jumlah uang Anda: Rp{total_uang}")
     print("            MENU  ")
     for i in range(9):
         print(f"({i+1})", isi[i], harga_isi[i])
@@ -132,9 +150,15 @@ def pilih_minum():
         print("Maaf hanya menerima input dari 1 sampai 4")
         sugar = input("Pilih: ")
     cek_uang()
-    if proses_minum:
+    if proses_minum and pembayaran == "1":
         print(
             f"Anda memilih {hotcold[int(hot)-1]} {isi[int(minum)-1]} ukuran {size_list[int(size)-1]}, {sugar_list[int(sugar)-1]}")
+    elif proses_minum and pembayaran == "2":
+        print("Selesaikan Pembayaran Anda melalui QRIS")
+        lanjut = input("Tekan 1 untuk lanjut: ")
+        while lanjut != "1":
+            lanjut = input("Tekan 1 untuk lanjut: ")
+
     elif proses_minum == False:
         a = input("(1) Masukkan uang lagi / (2) Pilih Minum lain: ")
         while a != "1" and a != "2":
@@ -182,9 +206,9 @@ print("        Pilihan Size ")
 for i in range(3):
     print(f"({i+1})", size_list[i], "++", harga_size[i])
 time.sleep(2)
-
 proses = True
-input_uang()
+
+pilih_metode_pembayaran()
 time.sleep(2)
 while proses:
     pilih_minum()
